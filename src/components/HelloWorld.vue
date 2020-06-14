@@ -1,16 +1,16 @@
 <template>
   <div class="hello">
     <h1>Bienvenue sur le projet d'Aurélien</h1>
-    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: String
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
