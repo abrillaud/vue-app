@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Bienvenue sur le projet d'Aurélien</h1>
+    <h2>Bienvenue sur le projet d'Aurélien</h2>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 export default {
   name: "HelloWorld",
   props: {
+    // eslint-disable-next-line
     msg: String
   }
 };

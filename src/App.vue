@@ -1,12 +1,42 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link>
+      <router-link to="/">Accueil</router-link> | <router-link to="/about">A propos</router-link> |
+      <router-link v-if="connected" to="/Login" @click.native="logout()" replace
+        >Se déconnecter</router-link
+      >
+      <router-link v-else to="/Login" @click="login()">Se connecter</router-link>
     </div>
-    <router-view />
+    <router-view @connected="setConnected" />
   </div>
 </template>
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      connected: false,
+      admin: {
+        username: "admin",
+        password: "password"
+      }
+    };
+  },
+  mounted() {
+    if (!this.connected) {
+      this.$router.replace({ name: "Login" });
+    }
+  },
+  methods: {
+    setConnected(status) {
+      this.connected = status;
+    },
+    logout() {
+      this.connected = false;
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -21,6 +51,7 @@
   padding: 30px;
 
   a {
+    font-size: 1.2em;
     font-weight: bold;
     color: #2c3e50;
 

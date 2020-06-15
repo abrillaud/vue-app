@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>C'est toujours le projet d'Aurélien</h1>
+    <h2>C'est toujours le projet d'Aurélien</h2>
   </div>
 </template>
