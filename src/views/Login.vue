@@ -4,36 +4,34 @@
       <div id="login-row" class="row justify-content-center align-items-center">
         <div id="login-column" class="col-md-6">
           <div id="login-box" class="col-md-12">
-            <h3 class="text-center text-body text-info">Page de connexion</h3>
-            <div class="form-group">
-              <label for="username" class="text-body text-info">identifiant :</label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                v-model="input.username"
-                class="form-control"
-              />
-            </div>
-            <div class="form-group">
-              <label for="password" class="text-body text-info">Mot de passe :</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                v-model="input.password"
-                class="form-control"
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="button"
-                name="submit"
-                class="btn btn-success btn-md"
-                @click="login()"
-                value="Se connecter"
-              />
-            </div>
+            <form id="login-form" class="form" @submit.prevent="login()">
+              <h3 class="text-center text-body text-info">Page de connexion</h3>
+              <div class="form-group">
+                <label for="username" class="text-body text-info">identifiant :</label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  v-model="username"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password" class="text-body text-info">Mot de passe :</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  v-model="password"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <button @click="persist" class="btn btn-success btn-md" type="submit">
+                  Se connecter
+                </button>
+              </div>
+            </form>
           </div>
           <div
             v-show="error"
@@ -61,6 +59,8 @@
   </div>
 </template>
 <script>
+import VueLocalStorage from "vue-localstorage";
+
 export default {
   name: "Login",
   data() {
@@ -74,11 +74,21 @@ export default {
     };
   },
   methods: {
+    set_data: function() {
+      console.log("set");
+      localStorage.setItem("username", this.username);
+      localStorage.setItem("password", this.password);
+      input = get_data();
+    },
+    persist() {
+      localStorage.username = this.username;
+      localStorage.password = this.password;
+    },
     login() {
-      if (this.input.username !== "" && this.input.password !== "") {
+      if (this.username !== "" && this.password !== "") {
         if (
-          this.input.username === this.$parent.admin.username &&
-          this.input.password === this.$parent.admin.password
+          this.username === this.$parent.admin.username &&
+          this.password === this.$parent.admin.password
         ) {
           this.$emit("connected", true);
           this.$router.replace({ name: "User" });
