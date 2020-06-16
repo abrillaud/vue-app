@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import User from "../views/User.vue";
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,7 +27,10 @@ const routes = [
   {
     path: "/user",
     name: "User",
-    component: User
+    component: User,
+    meta: {
+      connected: true
+    }
   }
 ];
 

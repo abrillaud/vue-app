@@ -76,9 +76,8 @@ export default {
   methods: {
     set_data: function() {
       console.log("set");
-      localStorage.setItem("username", this.username);
-      localStorage.setItem("password", this.password);
-      input = get_data();
+      localStorage.setItem("username", JSON.stringify(this.username));
+      localStorage.setItem("password", JSON.stringify(this.password));
     },
     persist() {
       localStorage.username = this.username;
@@ -93,10 +92,10 @@ export default {
           this.$emit("connected", true);
           this.$router.replace({ name: "User" });
         } else {
-          this.error = true;
+          this.error ^= true;
         }
       } else {
-        this.empty = true;
+        this.empty ^= true;
       }
     }
   }

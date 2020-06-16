@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Accueil</router-link> | <router-link to="/about">A propos</router-link> |
-      <router-link v-if="connected" to="/Login" @click.native="logout()" replace
-        >Se déconnecter</router-link
+      <router-link v-if="!connected" to="/">Accueil |</router-link>
+      <router-link v-if="!connected" to="/about"> A propos |</router-link>
+      <router-link v-if="connected" to="/User"> Utilisateurs |</router-link>
+      <router-link v-if="connected" to="/Login" @click.native="logout()" replace>
+        Se déconnecter</router-link
       >
-      <router-link v-else to="/Login" @click="login()">Se connecter</router-link>
+      <router-link v-else to="/Login" @click="login()"> Se connecter</router-link>
     </div>
     <router-view @connected="setConnected" />
   </div>
@@ -33,6 +35,7 @@ export default {
     },
     logout() {
       this.connected = false;
+      localStorage.clear();
     }
   }
 };
